@@ -1,9 +1,11 @@
 #ifndef CLSFECHA_H_INCLUDED
 #define CLSFECHA_H_INCLUDED
-# include<iostream>
+#include <iostream>
+#include <ctime>
 using namespace std;
 
-/*AUN NO MEJORÉ ESTA CLASE HAY QUE EDITARLA*/
+bool validarFecha(int d, int m, int a);
+
 class Fecha {
     private:
         int _dia, _mes, _anio;
@@ -15,7 +17,6 @@ class Fecha {
         }
         void Mostrar();
         void Cargar();
-        void CargarParaCli();
         int ConsolidadarFecha(){return ((_anio*10000)+(_mes*100)+(_dia));}
         ///gets()
         int getDia(){return _dia;}
@@ -43,19 +44,46 @@ void Fecha::Mostrar(){
 }
 
 void Fecha::Cargar(){
-    int aux;
+    int dia, mes, anio;
 
     cout<<"INGRESE EL DIA:             ";
-    cin>>aux;
-    setDia(aux);
+    cin>>dia;
 
     cout<<"INGRESE EL MES:             ";
-    cin>>aux;
-    setMes(aux);
+    cin>>mes;
 
     cout<<"INGRESE EL AÑO (4 digitos): ";
-    cin>>aux;
-    setAnio(aux);
+    cin>>anio;
+
+    if (fechavalida(dia, mes, anio)){setDia(dia);setMes(mes);setAnio(anio);}
+
+}
+
+bool validarFecha(int d, int m, int a){
+    bool bandera=true;
+    int v[12]={31,28,31,30,31,30,31,31,30,31,30,31};
+    int anioActual;
+
+    //chequear dia segun mes
+    if(d>=v[m-1]){
+        if (d==29 && m==2 && a%4==0) {
+            //chequear febrero y año bisiesto
+            if (a%100==0 && a%400!=0){bandera=false;}
+            else{ bandera=true;}
+        }else{bandera=false;}
+    }
+
+    //chequear mes
+    if (m<1 || m>12){bandera=false;}
+
+    //chequear año
+    time_t fechaActual;
+    time(&fechaActual);
+    struct tm *pST_tiempo = localtime(&fechaActual);
+    anioActual=pST_tiempo->tm_year+1900;
+    if (a<1900 || a>anioActual) {bandera=false;}
+
+    return bandera;
 }
 
 #endif // CLSFECHA_H_INCLUDED
