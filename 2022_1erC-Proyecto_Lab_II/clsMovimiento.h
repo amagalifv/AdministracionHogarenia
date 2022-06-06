@@ -1,9 +1,11 @@
 #ifndef CLSMOVIMIENTO_H_INCLUDED
 #define CLSMOVIMIENTO_H_INCLUDED
+#include <iostream>
+using namespace std;
 
+#include "prototipos.h"
 #include "clsFecha.h"
 
-const char *AR_MOVIMIENTOS = "movimientos.dat";
 class Movimiento {
     private:
         int _id;
@@ -11,6 +13,7 @@ class Movimiento {
         Fecha _fecha;
         float _importe;
         int _categoria;
+        bool _siGastoFijo;
         bool _estado;
 
     public:
@@ -26,6 +29,7 @@ class Movimiento {
         Fecha getFecha(){return _fecha;}
         float getImporte(){return _importe;}
         int getCategoria(){return _categoria;}
+        bool getSiGastoFijo(){return _siGastoFijo;}
         bool getEstado(){return _estado;}
     //SETTERS
         void setId(int id){_id=id;}/*ID NO TIENE SETTER BORRAR*/
@@ -33,32 +37,43 @@ class Movimiento {
         void setFecha(Fecha f){_fecha=f;}
         void setImporte(float imp){_importe=imp;}
         void setCategoria(int cate){_categoria=cate;}
+        void setSiGastoFijo(bool siG){_siGastoFijo=siG;}
         void setEstado(bool est){_estado=est;}
 
 };
 
-void Movimiento::Cargar(){
-    int aux;
-    float aux1;
-    //bool est;
 
-    //llamar a autogenerar id
+
+void Movimiento::Cargar(){
+    int auxI;
+    float auxF;
+    //bool est;
+    char resp;
+
+    auxI=autogenerarId();
+    setId(auxI);
 
     cout<<"INGRESE EL TIPO DE OPERACION (1-Ingreso , 0-Egreso): ";
-    cin>>aux;
-    setTipo(aux);
+    cin>>auxI;
+    setTipo(auxI);
 
     cout<<"FECHA DE LA OPERACION: "<<endl;
     _fecha.Cargar();
 
     cout<<"INGRESE EL IMPORTE: ";
-    cin>>aux1;
-    setImporte(aux1);
+    cin>>auxF;
+    setImporte(auxF);
 
     //LISTAR CATEGORIAS
     cout<<"INGRESE LA CATEGORIA DESEADA: ";
-    cin>>aux;
-    setCategoria(aux);
+    cin>>auxI;
+    setCategoria(auxI);
+
+    /* SOLO PREGUNTAR SI ES UN EGRESO Y SEGÚN CATEGORIA INGRESADA ¡¡¡¡CHARLAR!!! */
+    cout<<"ES UN GASTO FIJO (S PARA SI Y N PARA NO): ";
+    cin>>resp;
+    if (resp=='s' || resp=='S')_siGastoFijo=true;
+    else _siGastoFijo=false;
 
     /* PARA LA CARGA MANUAL(solo programadores)
     cout<<"Estado               :";

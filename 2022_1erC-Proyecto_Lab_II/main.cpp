@@ -6,6 +6,7 @@ using namespace std;
 
 # include "prototipos.h"
 # include "clsMovimiento.h"
+# include "funcMovimiento.h"
 
 int main(){
     int opc;

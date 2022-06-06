@@ -55,7 +55,7 @@ void Fecha::Cargar(){
     cout<<"INGRESE EL AÑO (4 digitos): ";
     cin>>anio;
 
-    if (fechavalida(dia, mes, anio)){setDia(dia);setMes(mes);setAnio(anio);}
+    if (validarFecha(dia, mes, anio)){setDia(dia);setMes(mes);setAnio(anio);}
 
 }
 

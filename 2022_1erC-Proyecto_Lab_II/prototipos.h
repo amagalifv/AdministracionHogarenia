@@ -1,11 +1,15 @@
 #ifndef PROTOTIPOS_H_INCLUDED
 #define PROTOTIPOS_H_INCLUDED
 
+const char *AR_MOVIMIENTOS = "movimientos.dat";
 
 //--------MOVIMIENTOS---------
-bool fechavalida(int, int, int);
+int autogenerarId();
+void listarMovimientos();
+int bajaLogica (int pos);
+int modificarRegistro(int id);
 
-int menuMovimientos();
+/* MENU -->*/int menuMovimientos();
 
 //--------CATEGORIAS---------
 
