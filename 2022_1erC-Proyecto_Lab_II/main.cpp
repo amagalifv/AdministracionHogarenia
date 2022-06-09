@@ -5,6 +5,7 @@
 using namespace std;
 
 # include "prototipos.h"
+#include "clsMovimientoServicio.h"
 # include "clsMovimiento.h"
 # include "funcMovimiento.h"
 

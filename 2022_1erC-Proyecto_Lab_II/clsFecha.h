@@ -17,7 +17,6 @@ class Fecha {
         }
         void Mostrar();
         void Cargar();
-        int ConsolidadarFecha(){return ((_anio*10000)+(_mes*100)+(_dia));}
         ///gets()
         int getDia(){return _dia;}
         int getMes(){return _mes;}
@@ -26,6 +25,10 @@ class Fecha {
         void setDia(int d){if(d>=1 && d<=31){ _dia=d;}else{_dia=0;_mes=0;_anio=0;}}
         void setMes(int m){if(m>=1 && m<=12){ _mes=m;}else{_dia=0;_mes=0;_anio=0;}}
         void setAnio(int a){if(a>=1920 && a<=2022){_anio=a;}else{_dia=0;_mes=0;_anio=0;}}
+        bool operator== (Fecha f){
+            if (f.getDia()==_dia && f.getMes()==_mes && f.getAnio()==_anio){return true;}
+            return false;
+        }
 };
 
 void Fecha::Mostrar(){

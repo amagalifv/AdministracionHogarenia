@@ -15,6 +15,7 @@ class Movimiento {
         int _categoria;
         bool _siGastoFijo;
         bool _estado;
+        int autogenerarId();
 
     public:
         void Mostrar();
@@ -32,7 +33,7 @@ class Movimiento {
         bool getSiGastoFijo(){return _siGastoFijo;}
         bool getEstado(){return _estado;}
     //SETTERS
-        void setId(int id){_id=id;}/*ID NO TIENE SETTER BORRAR*/
+        /*void setId(int id){_id=id;}ID NO TIENE SETTER BORRAR*/
         void setTipo(int tipo){_tipo=tipo;}
         void setFecha(Fecha f){_fecha=f;}
         void setImporte(float imp){_importe=imp;}
@@ -42,16 +43,43 @@ class Movimiento {
 
 };
 
+/**********************
+   AUTOGENERA EL ID
+ -1 si error de archivo
+  0 si error de fread
+  1 si está vacio el archivo
+**********************/
+int Movimiento::autogenerarId(){
+    int id;
+    int aux;
+    FILE *pMov;
 
+    pMov=fopen(AR_MOVIMIENTOS,"ab+");
+    if (pMov==NULL){return -1;} //error de apertura de archivo
+
+    fseek(pMov, 0 ,SEEK_END);
+    if (ftell(pMov)==0){return 1;}// si está vacio el archivo
+
+    fseek(pMov, -sizeof(Movimiento) ,SEEK_END);
+    aux=fread(this ,sizeof(Movimiento),1,pMov);
+    if (aux!=1){return 0;} // error de fread
+
+    id=this->getId();
+    id++;
+
+    return id;
+}
 
 void Movimiento::Cargar(){
-    int auxI;
+    int auxI,id;
     float auxF;
     //bool est;
     char resp;
 
-    auxI=autogenerarId();
-    setId(auxI);
+    id=autogenerarId();
+    if (id>0) {
+        _id=id;
+    }
 
     cout<<"INGRESE EL TIPO DE OPERACION (1-Ingreso , 0-Egreso): ";
     cin>>auxI;
@@ -68,6 +96,9 @@ void Movimiento::Cargar(){
     cout<<"INGRESE LA CATEGORIA DESEADA: ";
     cin>>auxI;
     setCategoria(auxI);
+    if (auxI==7) {
+        crearRegistroServicio(id);
+    }
 
     /* SOLO PREGUNTAR SI ES UN EGRESO Y SEGÚN CATEGORIA INGRESADA ¡¡¡¡CHARLAR!!! */
     cout<<"ES UN GASTO FIJO (S PARA SI Y N PARA NO): ";
@@ -86,7 +117,7 @@ void Movimiento::Mostrar(){
     cout<<"ID                    :";
     cout<<getId()<<endl;
     cout<<"TIPO DE OPERACION     :";
-    if (getTipo()) {cout<<"Ingreso"<<endl;}else{ cout<<"Egreso"<<endl;}
+    if (getTipo()==1 || getTipo()==2 || getTipo()==3) {cout<<"Ingreso"<<endl;}else{ cout<<"Egreso"<<endl;}
     cout<<"FECHA DE LA OPERACION :";
     _fecha.Mostrar();
     cout<<"IMPORTE               :";
@@ -96,11 +127,11 @@ void Movimiento::Mostrar(){
     cout<<endl;
 }
 
-/*
+/*******************************************************
 devuelve -1 si no lo pudo abrir archivo
 carga en el obj de la cls la info que leyo y devuelve 1
 Si no pudo leer devuelve 0
-*/
+********************************************************/
 int Movimiento::leerDeDisco(int pos){
     FILE *pMov;
     int leyo;
@@ -115,11 +146,11 @@ int Movimiento::leerDeDisco(int pos){
     return leyo;
 }
 
-/*
+/*******************************************************
 devuelve -1 si no lo pudo abrir archivo
 carga en el obj de la cls la info que leyo y devuelve 1
 Si no pudo leer devuelve 0
-*/
+********************************************************/
 int Movimiento::leerDeDisco(int pos, const char *nombreArchivo){
     FILE *pMov;
     int leyo;
@@ -134,10 +165,10 @@ int Movimiento::leerDeDisco(int pos, const char *nombreArchivo){
     return leyo;
 }
 
-/*
+/*********************************
 devuelve falso si NO pudo grabar
 y verdadero si pudo
-*/
+**********************************/
 bool Movimiento::grabarEnDisco(){
     FILE *pMov;
     bool escribio;
@@ -150,11 +181,11 @@ bool Movimiento::grabarEnDisco(){
     return escribio;
 }
 
-/*
+/***************************
 -1 si no pudo abrir
 0 si no pudo escribir
 1 si escribió exitosamente
-*/
+****************************/
 int Movimiento::modificarDeDisco(int pos){
     FILE *pMov;
     int escribio;

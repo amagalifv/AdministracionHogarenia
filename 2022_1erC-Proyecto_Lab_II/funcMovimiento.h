@@ -8,25 +8,6 @@ using namespace std;
 
 #include "clsMovimiento.h"
 
-/* AUTOGENERA EL ID */
-int autogenerarId(){
-    int id;
-    Movimiento mov;
-    FILE *pMov;
-
-    pMov=fopen(AR_MOVIMIENTOS,"rb");
-    if (pMov==NULL){return 0;}
-
-    fseek(pMov, sizeof(Movimiento),SEEK_END);
-    fread(&mov ,sizeof(Movimiento),1,pMov);
-    fclose(pMov);
-
-    id=mov.getId();
-    id++;
-
-    return id;
-}
-
 /* LISTA TODOS LOS MOVIMIENTOS */
 void listarMovimientos(){
     Movimiento mov;
