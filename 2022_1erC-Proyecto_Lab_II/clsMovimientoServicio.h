@@ -19,7 +19,7 @@ class MovimientoServicio{
         void Cargar(int id);
         int leerDeDisco(int pos);
         int leerDeDisco(int pos, const char *nombreArchivo);
-        bool grabarEnDisco();
+        int grabarEnDisco();
         int modificarDeDisco(int pos);
 
         //GETTERS
@@ -58,9 +58,11 @@ void MovimientoServicio::Cargar(int id){
     cin>>aux;
     setConsumo(aux);
 
-    cout<<"\tMEDIDA:  ";
+    cout<<"\tMEDIDA (1-kw, 2-min, 3-m3, 4-n/a):  ";
     cin>>aux;
     setMedida(aux);
+
+    setEstado(true);
 }
 
 /*******************************************************
@@ -102,15 +104,16 @@ int MovimientoServicio::leerDeDisco(int pos, const char *nombreArchivo){
 }
 
 /*********************************
-devuelve falso si NO pudo grabar
-y verdadero si pudo
+-1 error de apertura de archivo
+ 0 error fwrite
+ 1 si escribió exitosamente
 **********************************/
-bool MovimientoServicio::grabarEnDisco(){
+int MovimientoServicio::grabarEnDisco(){
     FILE *pServ;
     bool escribio;
 
     pServ=fopen(AR_MOVIMIENTOSERVICIOS,"ab");
-    if (pServ==NULL){return false;}
+    if (pServ==NULL){return -1;}
 
     escribio=fwrite(this ,sizeof(MovimientoServicio),1,pServ);
     fclose(pServ);

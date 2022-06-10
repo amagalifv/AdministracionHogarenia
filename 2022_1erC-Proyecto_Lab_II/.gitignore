@@ -2,3 +2,6 @@ bin/
 obj/
 .vscode/
 .exe
+.dat
+.ini
+.bkp

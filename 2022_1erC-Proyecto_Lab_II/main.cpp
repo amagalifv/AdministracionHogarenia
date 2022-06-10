@@ -5,9 +5,10 @@
 using namespace std;
 
 # include "prototipos.h"
-#include "clsMovimientoServicio.h"
 # include "clsMovimiento.h"
+#include "clsMovimientoServicio.h"
 # include "funcMovimiento.h"
+#include "funcMovimientoServicio.h"
 
 int main(){
     int opc;

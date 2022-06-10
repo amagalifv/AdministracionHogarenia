@@ -20,7 +20,7 @@ class Movimiento {
     public:
         void Mostrar();
         void Cargar();
-        bool grabarEnDisco();
+        int grabarEnDisco();
         int leerDeDisco(int pos);
         int leerDeDisco(int pos, const char *nombreArchivo);
         int modificarDeDisco(int pos);
@@ -46,7 +46,7 @@ class Movimiento {
 /**********************
    AUTOGENERA EL ID
  -1 si error de archivo
-  0 si error de fread
+ -2 si error de fread
   1 si está vacio el archivo
 **********************/
 int Movimiento::autogenerarId(){
@@ -60,9 +60,9 @@ int Movimiento::autogenerarId(){
     fseek(pMov, 0 ,SEEK_END);
     if (ftell(pMov)==0){return 1;}// si está vacio el archivo
 
-    fseek(pMov, -sizeof(Movimiento) ,SEEK_END);
+    fseek(pMov, sizeof(Movimiento)*(-1) ,SEEK_END);
     aux=fread(this ,sizeof(Movimiento),1,pMov);
-    if (aux!=1){return 0;} // error de fread
+    if (aux!=1){return -2;} // error de fread
 
     id=this->getId();
     id++;
@@ -76,7 +76,7 @@ void Movimiento::Cargar(){
     //bool est;
     char resp;
 
-    id=autogenerarId();
+    id=this->autogenerarId();
     if (id>0) {
         _id=id;
     }
@@ -114,6 +114,7 @@ void Movimiento::Cargar(){
 }
 
 void Movimiento::Mostrar(){
+
     cout<<"ID                    :";
     cout<<getId()<<endl;
     cout<<"TIPO DE OPERACION     :";
@@ -124,6 +125,15 @@ void Movimiento::Mostrar(){
     cout<<getImporte()<<endl;
     cout<<"CATEGORIA             :";
     cout<<getCategoria()<<endl;
+    /*
+    if (getCategoria()==7) {
+        MovimientoServicio serv;
+        int pos;
+
+        pos=buscarPorId(this->getId());
+        serv.leerDeDisco(pos);
+        serv.Mostrar();
+    }*/
     cout<<endl;
 }
 
@@ -166,15 +176,16 @@ int Movimiento::leerDeDisco(int pos, const char *nombreArchivo){
 }
 
 /*********************************
-devuelve falso si NO pudo grabar
-y verdadero si pudo
+-1 error de apertura de archivo
+ 0 error fwrite
+ 1 si escribió exitosamente
 **********************************/
-bool Movimiento::grabarEnDisco(){
+int Movimiento::grabarEnDisco(){
     FILE *pMov;
     bool escribio;
 
     pMov=fopen(AR_MOVIMIENTOS,"ab");
-    if (pMov==NULL){return false;}
+    if (pMov==NULL){return -1;}
 
     escribio=fwrite(this ,sizeof(Movimiento),1,pMov);
     fclose(pMov);

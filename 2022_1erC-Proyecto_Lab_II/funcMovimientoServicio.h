@@ -9,6 +9,7 @@ void crearRegistroServicio(int id){
 
     serv.Cargar(id);
     serv.grabarEnDisco();
+    cout<<endl;
 }
 
 void bajaLogicaServicio(int id){

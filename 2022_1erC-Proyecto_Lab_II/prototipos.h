@@ -11,7 +11,6 @@ const char *AR_MOVIMIENTOSERVICIOS = "movimientoservicios.dat";
 void cargarCadena(char *pal, int tam);
 
 //--------MOVIMIENTOS---------
-int autogenerarId();
 void listarMovimientos();
 int bajaLogica (int pos);
 int modificarRegistro(int id);
