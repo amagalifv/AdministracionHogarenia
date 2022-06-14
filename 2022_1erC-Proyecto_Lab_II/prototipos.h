@@ -8,25 +8,30 @@ using namespace std;
 const char *AR_MOVIMIENTOS = "movimientos.dat";
 const char *AR_MOVIMIENTOSERVICIOS = "movimientoservicios.dat";
 
+
 void cargarCadena(char *pal, int tam);
-
-//--------MOVIMIENTOS---------
-void listarMovimientos();
-int bajaLogica (int pos);
-int modificarRegistro(int id);
-
-/* MENU -->*/int menuMovimientos();
 
 //---MOVIMIENTOS SERVICIOS---
 void crearRegistroServicio(int);
 void bajaLogicaServicio(int);
 int buscarPorId (int);
 
+//--------MOVIMIENTOS---------
+void listarMovimientos();
+int bajaLogica (int pos);
+int modificarRegistro(int id);
+void mostrarServicio(int id);
+
+int menuMovimientos();
+
 //--------CATEGORIAS---------
 
 //----------KAKEBO-----------
 
 //---------INFORMES----------
+
+
+int menuInformes();
 
 //-------CONFIGURACION-------
 

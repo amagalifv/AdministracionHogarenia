@@ -19,6 +19,7 @@ void bajaLogicaServicio(int id){
     pos=buscarPorId(id);
     if (serv.leerDeDisco(pos)!=-1) {
         serv.setEstado(false);
+        serv.modificarDeDisco(pos);
     }
 
 }

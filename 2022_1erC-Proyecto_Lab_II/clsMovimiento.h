@@ -9,7 +9,6 @@ using namespace std;
 class Movimiento {
     private:
         int _id;
-        int _tipo;
         Fecha _fecha;
         float _importe;
         int _categoria;
@@ -26,7 +25,6 @@ class Movimiento {
         int modificarDeDisco(int pos);
     //GETTERS
         int getId(){return _id;}
-        int getTipo(){return _tipo;}
         Fecha getFecha(){return _fecha;}
         float getImporte(){return _importe;}
         int getCategoria(){return _categoria;}
@@ -34,7 +32,6 @@ class Movimiento {
         bool getEstado(){return _estado;}
     //SETTERS
         /*void setId(int id){_id=id;}ID NO TIENE SETTER BORRAR*/
-        void setTipo(int tipo){_tipo=tipo;}
         void setFecha(Fecha f){_fecha=f;}
         void setImporte(float imp){_importe=imp;}
         void setCategoria(int cate){_categoria=cate;}
@@ -43,12 +40,12 @@ class Movimiento {
 
 };
 
-/**********************
+/*******************************
    AUTOGENERA EL ID
  -1 si error de archivo
  -2 si error de fread
   1 si está vacio el archivo
-**********************/
+********************************/
 int Movimiento::autogenerarId(){
     int id;
     int aux;
@@ -60,7 +57,7 @@ int Movimiento::autogenerarId(){
     fseek(pMov, 0 ,SEEK_END);
     if (ftell(pMov)==0){return 1;}// si está vacio el archivo
 
-    fseek(pMov, sizeof(Movimiento)*(-1) ,SEEK_END);
+    fseek(pMov, (-1)*sizeof(Movimiento) ,SEEK_END);
     aux=fread(this ,sizeof(Movimiento),1,pMov);
     if (aux!=1){return -2;} // error de fread
 
@@ -81,10 +78,6 @@ void Movimiento::Cargar(){
         _id=id;
     }
 
-    cout<<"INGRESE EL TIPO DE OPERACION (1-Ingreso , 0-Egreso): ";
-    cin>>auxI;
-    setTipo(auxI);
-
     cout<<"FECHA DE LA OPERACION: "<<endl;
     _fecha.Cargar();
 
@@ -92,7 +85,7 @@ void Movimiento::Cargar(){
     cin>>auxF;
     setImporte(auxF);
 
-    //LISTAR CATEGORIAS
+    //LISTAR CATEGORIAS!!!! categoria y descripcion unicamente!!
     cout<<"INGRESE LA CATEGORIA DESEADA: ";
     cin>>auxI;
     setCategoria(auxI);
@@ -100,11 +93,14 @@ void Movimiento::Cargar(){
         crearRegistroServicio(id);
     }
 
-    /* SOLO PREGUNTAR SI ES UN EGRESO Y SEGÚN CATEGORIA INGRESADA ¡¡¡¡CHARLAR!!! */
-    cout<<"ES UN GASTO FIJO (S PARA SI Y N PARA NO): ";
-    cin>>resp;
-    if (resp=='s' || resp=='S')_siGastoFijo=true;
-    else _siGastoFijo=false;
+    if (auxI==1 || auxI==2 || auxI==3) {
+        _siGastoFijo=false;
+    }else{
+        cout<<"ES UN GASTO FIJO (S PARA SI Y N PARA NO): ";
+        cin>>resp;
+        if (resp=='s' || resp=='S'){_siGastoFijo=true;}
+        else {_siGastoFijo=false;}
+    }
 
     /* PARA LA CARGA MANUAL(solo programadores)
     cout<<"Estado               :";
@@ -117,23 +113,16 @@ void Movimiento::Mostrar(){
 
     cout<<"ID                    :";
     cout<<getId()<<endl;
-    cout<<"TIPO DE OPERACION     :";
-    if (getTipo()==1 || getTipo()==2 || getTipo()==3) {cout<<"Ingreso"<<endl;}else{ cout<<"Egreso"<<endl;}
     cout<<"FECHA DE LA OPERACION :";
     _fecha.Mostrar();
     cout<<"IMPORTE               :";
     cout<<getImporte()<<endl;
     cout<<"CATEGORIA             :";
     cout<<getCategoria()<<endl;
-    /*
-    if (getCategoria()==7) {
-        MovimientoServicio serv;
-        int pos;
 
-        pos=buscarPorId(this->getId());
-        serv.leerDeDisco(pos);
-        serv.Mostrar();
-    }*/
+    if (getCategoria()==7) {
+        mostrarServicio(getId());
+    }
     cout<<endl;
 }
 

@@ -14,7 +14,7 @@ void listarMovimientos(){
     int i=0;
 
     while(mov.leerDeDisco(i)==1){
-        if (mov.getEstado()) {
+        if (mov.getEstado()==true) {
             mov.Mostrar();
         }
         i++;
@@ -40,6 +40,18 @@ int bajaLogica (int pos){
     }
 }
 
+/*Se llama desde clsMovimiento en Cargar si es == a categoria 7*/
+void mostrarServicio(int id){
+    MovimientoServicio serv;
+    int pos;
+
+    pos=buscarPorId(id);
+    if (pos!=-1) {
+        serv.leerDeDisco(pos);
+        serv.Mostrar();
+    }else{cout<<"Error! No se encontró el servicio indicado"<<endl;}
+}
+
 int modificarRegistro(int id){
     int opc;
     Movimiento mov;
@@ -52,11 +64,10 @@ int modificarRegistro(int id){
     mov.leerDeDisco(id);
 
     cout<<"      ¿QUE DESEA MODIFICAR?    \n";
-    cout<<"1) TIPO DE MOVIMIENTO          \n";
-    cout<<"2) FECHA DE MOVIMIENTO         \n";
-    cout<<"3) IMPORTE DE MOVIMIENTO       \n";
-    cout<<"4) CATEGORIA DE MOVIMIENTO     \n";
-    cout<<"5) SI ES GASTO FIJO            \n";
+    cout<<"1) FECHA DE MOVIMIENTO         \n";
+    cout<<"2) IMPORTE DE MOVIMIENTO       \n";
+    cout<<"3) CATEGORIA DE MOVIMIENTO     \n";
+    cout<<"4) SI ES GASTO FIJO            \n";
     cout<<"-------------------------------\n";
 
     cin>>opc;
@@ -65,25 +76,20 @@ int modificarRegistro(int id){
     switch(opc){
 
         case 1:
-            cout<<"INGRESE EL TIPO DE OPERACION (1-Ingreso , 0-Egreso): ";
-            cin>>auxI;
-            mov.setTipo(auxI);
-            break;
-        case 2:
             fecha.Cargar();
             mov.setFecha(fecha);
             break;
-        case 3:
+        case 2:
             cout<<"INGRESE EL IMPORTE A MODIFICAR: ";
             cin>>auxF;
             mov.setImporte(auxF);
             break;
-        case 4:
+        case 3:
             cout<<"INGRESE LA CATEGORIA DESEADA: ";
             cin>>auxI;
             mov.setCategoria(auxI);
             break;
-        case 5:
+        case 4:
             cout<<"ES UN GASTO FIJO (S PARA SI Y N PARA NO): ";
             cin>>resp;
             if (resp=='s' || resp=='S') mov.setSiGastoFijo(true);
@@ -121,14 +127,14 @@ int menuMovimientos(){
                 obj.grabarEnDisco();
                 break;
             case 2:
-                cout<<"INGRESE EL ID DEL MOVIMIENTO A MODIFICAR";
+                cout<<"INGRESE EL ID DEL MOVIMIENTO A MODIFICAR: ";
                 cin>>id;
-                modificarRegistro(id);
+                modificarRegistro(id-1);
                 break;
             case 3:
-                cout<<"INGRESE EL ID DEL MOVIMIENTO A BORRAR";
+                cout<<"INGRESE EL ID DEL MOVIMIENTO A BORRAR: ";
                 cin>>id;
-                devol=bajaLogica(id);
+                devol=bajaLogica(id-1);
                 if (devol==1) {
                     cout<<"El registro se dió de baja exitosamente";
                 }else{cout<<"Error";}
