@@ -98,7 +98,7 @@ void devuelveFechaActualSistema(Fecha *f){
     time(&fechaActual);
     struct tm *pST_tiempo = localtime(&fechaActual);
     f->setAnio(pST_tiempo->tm_year+1900);
-    f->setMes(pST_tiempo->tm_mon);
+    f->setMes(pST_tiempo->tm_mon+1);
     f->setDia(pST_tiempo->tm_mday);
 }
 
