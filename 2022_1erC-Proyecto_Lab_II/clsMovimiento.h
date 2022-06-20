@@ -57,7 +57,7 @@ int Movimiento::autogenerarId(){
     fseek(pMov, 0 ,SEEK_END);
     if (ftell(pMov)==0){return 1;}// si está vacio el archivo
 
-    fseek(pMov, (-1)*sizeof(Movimiento) ,SEEK_END);
+    fseek(pMov, (-1)*sizeof(Movimiento) , 2);
     aux=fread(this ,sizeof(Movimiento),1,pMov);
     if (aux!=1){return -2;} // error de fread
 

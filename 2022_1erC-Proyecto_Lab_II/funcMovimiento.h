@@ -11,14 +11,16 @@ using namespace std;
 /* LISTA TODOS LOS MOVIMIENTOS */
 void listarMovimientos(){
     Movimiento mov;
-    int i=0;
+    int i=0, j=0;
 
     while(mov.leerDeDisco(i)==1){
         if (mov.getEstado()==true) {
             mov.Mostrar();
+            j++;
         }
         i++;
     }
+    cout<<"\n\nTotal Movimientos: "<<j<<endl;
 }
 
 /*
