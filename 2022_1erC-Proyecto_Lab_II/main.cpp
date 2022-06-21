@@ -4,26 +4,29 @@
 # include<cstring>
 using namespace std;
 
-# include "prototipos.h"
-# include "clsMovimiento.h"
+#include "prototipos.h"
+#include "clsMovimiento.h"
 #include "clsMovimientoServicio.h"
-# include "funcMovimiento.h"
+#include "funcMovimiento.h"
 #include "funcMovimientoServicio.h"
 
 int main(){
     int opc;
 
     while(true){
-        cout<<"        MENU PRINCIPAL          \n";
-        cout<<"--------------------------------\n";
+        cout<<"************************************\n";
+        cout<<"           MENU PRINCIPAL           \n";
+        cout<<"************************************\n";
+        cout<<"      1) MENU MOVIMIENTOS           \n";
+        cout<<"      2) MENU CATEGORIAS            \n";
+        cout<<"      3) MENU KAKEBO                \n";
+        cout<<"      4) MENU INFORMES              \n";
+        cout<<"      5) MENU CONFIGURACION         \n";
+        cout<<"************************************\n";
+        cout<<"      0) FIN DEL PROGRAMA           \n";
+        cout<<"************************************\n";
         cout<<endl;
-        cout<<"1) MENU MOVIMIENTOS             \n";
-        cout<<"2) MENU CATEGORIAS              \n";
-        cout<<"3) MENU KAKEBO                  \n";
-        cout<<"4) MENU INFORMES                \n";
-        cout<<"5) MENU CONFIGURACION           \n";
-        cout<<"--------------------------------\n";
-        cout<<"0) FIN DEL PROGRAMA             \n";
+        cout<<"SELECCIONE UNA DE LAS OPCIONES: ";
         cin>>opc;
         system("cls");
 

@@ -59,7 +59,12 @@ void Fecha::Cargar(bool siAnioFuturo=false){
     cin>>anio;
 
 
-    if (validarFecha(dia, mes, anio,siAnioFuturo)){setDia(dia);setMes(mes);setAnio(anio);}
+    if (validarFecha(dia, mes, anio,siAnioFuturo)){
+        setDia(dia);setMes(mes);setAnio(anio);
+    } else{
+        cout<<"Fecha incorrecta, se guardará 0/0/0";
+        setDia(0);setMes(0);setAnio(0);
+    }
 
 }
 /********************FUNCIONES FECHA********************/
@@ -81,14 +86,14 @@ bool validarFecha(int d, int m, int a, bool siAnioFutu){
     //chequear mes
     if (m<1 || m>12){bandera=false;}
 
-    if (siAnioFutu==false) {
+    if (siAnioFutu==true) {
         //chequear año
         time_t fechaActual;
         time(&fechaActual);
         struct tm *pST_tiempo = localtime(&fechaActual);
         anioActual=pST_tiempo->tm_year+1900;
-        if (a<1900 || a>anioActual) {bandera=false;}
-    }
+        if (a<1920 || a>anioActual) {bandera=false;}
+    }else{if (a<1920){bandera=false;}}
 
     return bandera;
 }

@@ -14,11 +14,12 @@ void cargarCadena(char *pal, int tam);
 //---MOVIMIENTOS SERVICIOS---
 void crearRegistroServicio(int);
 void bajaLogicaServicio(int);
-int buscarPorId (int);
+int buscarPorIdServ (int);
 
 //--------MOVIMIENTOS---------
 void listarMovimientos();
-int bajaLogica (int pos);
+int buscarPorIdMov (int &id);
+int bajaLogica(int);
 int modificarRegistro(int id);
 void mostrarServicio(int id);
 

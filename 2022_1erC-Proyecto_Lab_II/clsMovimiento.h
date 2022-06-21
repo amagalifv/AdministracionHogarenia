@@ -115,7 +115,7 @@ void Movimiento::Mostrar(){
     cout<<getId()<<endl;
     cout<<"FECHA DE LA OPERACION :";
     _fecha.Mostrar();
-    cout<<"IMPORTE               :";
+    cout<<"IMPORTE               : $";
     cout<<getImporte()<<endl;
     cout<<"CATEGORIA             :";
     cout<<getCategoria()<<endl;
