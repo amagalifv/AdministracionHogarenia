@@ -4,6 +4,8 @@
 #include <ctime>
 using namespace std;
 
+#include "prototipos.h"
+
 bool validarFecha(int d, int m, int a, bool siAnioFutu);
 
 class Fecha {
@@ -32,8 +34,9 @@ class Fecha {
 };
 
 void Fecha::Mostrar(){
+    cout<<endl;
     if (getDia()<10){
-        cout<<"0"<<getDia();
+        cout<<" 0"<<getDia();
     }else{
         cout<<getDia();
     }
@@ -59,16 +62,21 @@ void Fecha::Cargar(bool siAnioFuturo=false){
     cin>>anio;
 
 
-    if (validarFecha(dia, mes, anio,siAnioFuturo)){
-        setDia(dia);setMes(mes);setAnio(anio);
-    } else{
-        cout<<"Fecha incorrecta, se guardará 0/0/0";
-        setDia(0);setMes(0);setAnio(0);
+    while(!validarFecha(dia, mes, anio, siAnioFuturo)){
+        cout<<"\nFECHA INCORRECTA, intentelo nuevamente\n";
+
+        cout<<"INGRESE EL DIA:             ";
+        cin>>dia;
+
+        cout<<"INGRESE EL MES:             ";
+        cin>>mes;
+
+        cout<<"INGRESE EL AÑO (4 digitos): ";
+        cin>>anio;
     }
+    setDia(dia);setMes(mes);setAnio(anio);
 
 }
-/********************FUNCIONES FECHA********************/
-
 bool validarFecha(int d, int m, int a, bool siAnioFutu){
     bool bandera=true;
     int v[12]={31,28,31,30,31,30,31,31,30,31,30,31};

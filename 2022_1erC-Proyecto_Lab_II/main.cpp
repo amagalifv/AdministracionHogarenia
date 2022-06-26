@@ -2,16 +2,27 @@
 # include<cstdlib>
 # include<cstdio>
 # include<cstring>
+// Añade paquete de idiomas
+#include <locale.h>
 using namespace std;
 
 #include "prototipos.h"
+#include "clsFecha.h"
 #include "clsMovimiento.h"
 #include "clsMovimientoServicio.h"
 #include "funcMovimiento.h"
 #include "funcMovimientoServicio.h"
+#include "clsCategoria.h"
+#include "funcCategoria.h"
+#include "clsAhorro.h"
+#include "funcAhorro.h"
+#include "funcConfiguracion.h"
+#include "funcInformes.h"
+
 
 int main(){
     int opc;
+    setlocale(LC_ALL, "spanish");
 
     while(true){
         cout<<"************************************\n";
@@ -36,20 +47,17 @@ int main(){
                 menuMovimientos();
                 break;
             case 2:
-                cout<<"En construccion...";
-                //menuCategorias();
+                menuCategorias();
                 break;
             case 3:
-                cout<<"En construccion...";
-                //menuKakebo();
+                menuKakebo();
                 break;
             case 4:
                 //menuInformes();
                 cout<<"En construccion...";
                 break;
             case 5:
-                //menuConfiguracion();
-                cout<<"En construccion...";
+                menuConfiguracion();
                 break;
             default:
                 return 0;

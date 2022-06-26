@@ -7,6 +7,7 @@
 using namespace std;
 
 #include "clsMovimiento.h"
+#include "funcCategoria.h"
 
 /* LISTA TODOS LOS MOVIMIENTOS */
 void listarMovimientos(){
@@ -20,7 +21,7 @@ void listarMovimientos(){
         }
         i++;
     }
-    cout<<"\n\nTotal Movimientos: "<<j<<endl;
+    cout<<"\n\nTotal Movimientos: \n"<<j<<endl;
 }
 
 /************************************
@@ -68,7 +69,7 @@ void mostrarServicio(int id){
     if (pos!=-1) {
         serv.leerDeDisco(pos);
         serv.Mostrar();
-    }else{cout<<"Error! No se encontró el servicio indicado"<<endl;}
+    }else{cout<<"\nError! No se encontró el servicio indicado\n"<<endl;}
 }
 
 int modificarRegistro(int id){
@@ -82,12 +83,12 @@ int modificarRegistro(int id){
 
     mov.leerDeDisco(id);
 
-    cout<<"      ¿QUE DESEA MODIFICAR?    \n";
+    cout<<"\n      ¿QUE DESEA MODIFICAR?    \n";
     cout<<"1) FECHA DE MOVIMIENTO         \n";
     cout<<"2) IMPORTE DE MOVIMIENTO       \n";
     cout<<"3) CATEGORIA DE MOVIMIENTO     \n";
     cout<<"4) SI ES GASTO FIJO            \n";
-    cout<<"-------------------------------\n";
+    cout<<"-------------------------------\n\n";
 
     cin>>opc;
     system("cls");
@@ -122,12 +123,24 @@ int modificarRegistro(int id){
     return devol;
 }
 
+bool siCategoriaValida(int cate){
+    int pos;
+
+    pos=buscarCategoria(cate);
+
+    if (pos>=0) {
+        return true;
+    }
+
+    return false;
+}
+
 int menuMovimientos(){
     int opc, id, devol;
     Movimiento obj;
 
     while(true){
-        cout<<"************************************\n";
+        cout<<"\n************************************\n";
         cout<<"          MENU MOVIMIENTOS          \n";
         cout<<"************************************\n";
         cout<<"      1) INGRESAR MOVIMIENTO        \n";
@@ -147,20 +160,20 @@ int menuMovimientos(){
             case 1:
                 obj.Cargar();
                 if (obj.grabarEnDisco()==1){
-                    cout<<"Registro agregado exitosamente!\n";
+                    cout<<"\nRegistro agregado exitosamente!\n";
                 }else{cout<<"Error\n";}
                 break;
             case 2:
-                cout<<"INGRESE EL ID DEL MOVIMIENTO A MODIFICAR: ";
+                cout<<"\nINGRESE EL ID DEL MOVIMIENTO A MODIFICAR: ";
                 cin>>id;
                 modificarRegistro(id);
                 break;
             case 3:
-                cout<<"INGRESE EL ID DEL MOVIMIENTO A BORRAR: ";
+                cout<<"\nINGRESE EL ID DEL MOVIMIENTO A BORRAR: ";
                 cin>>id;
                 devol=bajaLogica(id);
                 if (devol==1) {
-                    cout<<"El registro se dió de baja exitosamente!\n";
+                    cout<<"\nEl registro se dió de baja exitosamente!\n";
                 }else{cout<<"Error\n";}
                 break;
             case 4:

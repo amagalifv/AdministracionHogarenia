@@ -5,6 +5,7 @@ using namespace std;
 
 #include "prototipos.h"
 #include "clsFecha.h"
+#include "clsCategoria.h"
 
 class Movimiento {
     private:
@@ -52,14 +53,14 @@ int Movimiento::autogenerarId(){
     FILE *pMov;
 
     pMov=fopen(AR_MOVIMIENTOS,"ab+");
-    if (pMov==NULL){return -1;} //error de apertura de archivo
+    if (pMov==NULL){return -1;} //si error de apertura de archivo
 
     fseek(pMov, 0 ,SEEK_END);
     if (ftell(pMov)==0){return 1;}// si está vacio el archivo
 
-    fseek(pMov, (-1)*sizeof(Movimiento) , 2);
+    fseek(pMov, ftell(pMov) - sizeof(Movimiento), SEEK_SET);//me muevo del principio para adelante habiendo movido el puntero al final del archivo antes
     aux=fread(this ,sizeof(Movimiento),1,pMov);
-    if (aux!=1){return -2;} // error de fread
+    if (aux!=1){return -2;} //si error de fread
 
     id=this->getId();
     id++;
@@ -83,12 +84,21 @@ void Movimiento::Cargar(){
 
     cout<<"INGRESE EL IMPORTE: ";
     cin>>auxF;
-    setImporte(auxF);
+    if(auxF>0)setImporte(auxF);
+    else setImporte(0);
 
-    //LISTAR CATEGORIAS!!!! categoria y descripcion unicamente!!
+    listarCategoriasAcotado();
     cout<<"INGRESE LA CATEGORIA DESEADA: ";
     cin>>auxI;
+
+    while (siCategoriaValida(auxI)==false) {
+        cout<<"\nCategoria no encontrada! Intentelo nuevamente\n";
+
+        cout<<"INGRESE LA CATEGORIA DESEADA: ";
+        cin>>auxI;
+    }
     setCategoria(auxI);
+
     if (auxI==7) {
         crearRegistroServicio(id);
     }
@@ -110,7 +120,10 @@ void Movimiento::Cargar(){
 }
 
 void Movimiento::Mostrar(){
+    int pos;
+    Categoria cate;
 
+    cout<<endl;
     cout<<"ID                    :";
     cout<<getId()<<endl;
     cout<<"FECHA DE LA OPERACION :";
@@ -118,7 +131,13 @@ void Movimiento::Mostrar(){
     cout<<"IMPORTE               : $";
     cout<<getImporte()<<endl;
     cout<<"CATEGORIA             :";
-    cout<<getCategoria()<<endl;
+    cout<<getCategoria()<<", ";
+
+    pos=buscarCategoria(getCategoria());
+    if (pos>=0){
+        cate.leerDeDisco(pos);
+        cout<<cate.getNombre()<<endl;
+    }
 
     if (getCategoria()==7) {
         mostrarServicio(getId());
