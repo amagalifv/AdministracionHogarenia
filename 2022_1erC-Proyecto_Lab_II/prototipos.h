@@ -5,6 +5,7 @@
 #include<cstring>
 # include<cstdlib>
 # include<cstdio>
+# include<windows.h>
 using namespace std;
 
 #include "clsFecha.h"
@@ -31,6 +32,8 @@ const char *INI_AHORRO = "Archivos/ahorro.ini";
 void cargarCadena(char *pal, int tam);
 void mensajeOperacion(bool resultado);
 void mensajesListados(const char *mensaje);
+void gotoxy(short x, short y);
+HWND WINAPI GetConsoleWindowNT(void);
 
 //---MOVIMIENTOS SERVICIOS---
 void crearRegistroServicio(int);
@@ -140,6 +143,27 @@ void mensajeOperacion(bool resultado){
 
 void mensajesListados(const char *mensaje){
   cout<<"\n******** "<<mensaje<<" ********\n"<<endl;
+}
+
+// COLOCA CURSOR EN DET. LUGAR
+void gotoxy(short x, short y){
+    COORD a;
+    a.X = x;
+    a.Y = y;
+    SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE),a);
+}
+
+HWND WINAPI GetConsoleWindowNT(void){
+  typedef HWND WINAPI(*GetConsoleWindowT)(void);
+  GetConsoleWindowT GetConsoleWindow;
+  HMODULE hk32Lib = GetModuleHandle(TEXT("KERNEL32.DLL"));
+  GetConsoleWindow = (GetConsoleWindowT)GetProcAddress(hk32Lib,TEXT("GetConsoleWindow"));
+
+  if(GetConsoleWindow == NULL){
+      return NULL;
+  }
+
+  return GetConsoleWindow();
 }
 
 #endif // PROTOTIPOS_H_INCLUDED

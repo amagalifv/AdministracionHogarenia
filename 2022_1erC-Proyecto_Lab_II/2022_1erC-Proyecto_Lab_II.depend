@@ -1,0 +1,94 @@
+# depslib dependency file v1.0
+1656349079 source:c:\users\equipo\documents\proyectos codeblocks\proyecto_final_labo2 - 1er_c_2022\2022_1erc-proyecto_lab_ii\main.cpp
+	<iostream>
+	<cstdlib>
+	<cstdio>
+	<cstring>
+	<locale.h>
+	<windows.h>
+	"prototipos.h"
+	"clsFecha.h"
+	"clsMovimiento.h"
+	"clsMovimientoServicio.h"
+	"funcMovimiento.h"
+	"funcMovimientoServicio.h"
+	"clsCategoria.h"
+	"funcCategoria.h"
+	"clsAhorro.h"
+	"funcAhorro.h"
+	"funcConfiguracion.h"
+	"funcInformes.h"
+
+1656349121 c:\users\equipo\documents\proyectos codeblocks\proyecto_final_labo2 - 1er_c_2022\2022_1erc-proyecto_lab_ii\prototipos.h
+	<iostream>
+	<cstring>
+	<cstdlib>
+	<cstdio>
+	<windows.h>
+	"clsFecha.h"
+
+1656336605 c:\users\equipo\documents\proyectos codeblocks\proyecto_final_labo2 - 1er_c_2022\2022_1erc-proyecto_lab_ii\clsmovimiento.h
+	<iostream>
+	"prototipos.h"
+	"clsFecha.h"
+	"clsCategoria.h"
+
+1656333019 c:\users\equipo\documents\proyectos codeblocks\proyecto_final_labo2 - 1er_c_2022\2022_1erc-proyecto_lab_ii\clsfecha.h
+	<iostream>
+	<ctime>
+	"prototipos.h"
+
+1655767948 c:\users\equipo\documents\proyectos codeblocks\proyecto_final_labo2 - 1er_c_2022\2022_1erc-proyecto_lab_ii\clsmovimientoservicio.h
+	<cstring>
+	"prototipos.h"
+
+1656349746 c:\users\equipo\documents\proyectos codeblocks\proyecto_final_labo2 - 1er_c_2022\2022_1erc-proyecto_lab_ii\funcmovimiento.h
+	<iostream>
+	<cstdlib>
+	<cstdio>
+	<cstring>
+	"clsMovimiento.h"
+	"funcCategoria.h"
+
+1655769081 c:\users\equipo\documents\proyectos codeblocks\proyecto_final_labo2 - 1er_c_2022\2022_1erc-proyecto_lab_ii\funcmovimientoservicio.h
+	"prototipos.h"
+	"clsMovimientoServicio.h"
+
+1655817841 c:\users\equipo\documents\proyectos codeblocks\proyecto_final_labo2 - 1er_c_2022\2022_1erc-proyecto_lab_ii\clscategoria.h
+	"prototipos.h"
+	<string.h>
+	<iostream>
+
+1656337723 c:\users\equipo\documents\proyectos codeblocks\proyecto_final_labo2 - 1er_c_2022\2022_1erc-proyecto_lab_ii\funccategoria.h
+	<string.h>
+	"clsCategoria.h"
+	"clsMovimiento.h"
+
+1655837500 c:\users\equipo\documents\proyectos codeblocks\proyecto_final_labo2 - 1er_c_2022\2022_1erc-proyecto_lab_ii\clsahorro.h
+	"clsFecha.h"
+	"prototipos.h"
+
+1656164371 c:\users\equipo\documents\proyectos codeblocks\proyecto_final_labo2 - 1er_c_2022\2022_1erc-proyecto_lab_ii\funcahorro.h
+	"prototipos.h"
+	"clsAhorro.h"
+	"clsMovimiento.h"
+	"clsCategoria.h"
+	"funcCategoria.h"
+
+1655837169 c:\users\equipo\documents\proyectos codeblocks\proyecto_final_labo2 - 1er_c_2022\2022_1erc-proyecto_lab_ii\funcconfiguracion.h
+	<string.h>
+	"clsMovimiento.h"
+	"clsMovimientoServicio.h"
+	"clsCategoria.h"
+	"clsAhorro.h"
+	"prototipos.h"
+
+1656346490 c:\users\equipo\documents\proyectos codeblocks\proyecto_final_labo2 - 1er_c_2022\2022_1erc-proyecto_lab_ii\funcinformes.h
+	<iostream>
+	<cstdlib>
+	<cstdio>
+	<cstring>
+	"prototipos.h"
+	"clsMovimiento.h"
+	"clsCategoria.h"
+

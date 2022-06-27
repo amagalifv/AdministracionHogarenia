@@ -4,6 +4,7 @@
 # include<cstring>
 // Añade paquete de idiomas
 #include <locale.h>
+# include<windows.h>
 using namespace std;
 
 #include "prototipos.h"
@@ -20,7 +21,19 @@ using namespace std;
 #include "funcInformes.h"
 
 
+
 int main(){
+    system ("color 57");
+    //system ("mode con cols=152 lines=32");
+
+    /**********************************
+     maneja tamaño de la ventana sin
+     limitar el buffer de la consola
+     tb permite que se pueda mover
+    **********************************/
+    HWND hWnd=GetConsoleWindowNT();
+    MoveWindow(hWnd,0,0,1250,500,TRUE);
+
     int opc;
     setlocale(LC_ALL, "spanish");
 

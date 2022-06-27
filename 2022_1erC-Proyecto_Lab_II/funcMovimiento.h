@@ -13,6 +13,8 @@ using namespace std;
 void listarMovimientos(){
     Movimiento mov;
     int i=0, j=0;
+    //Movimiento *vMov;
+    //int tam;
 
     while(mov.leerDeDisco(i)==1){
         if (mov.getEstado()==true) {
@@ -21,7 +23,13 @@ void listarMovimientos(){
         }
         i++;
     }
-    cout<<"\n\nTotal Movimientos: \n"<<j<<endl;
+    //tam=j;
+
+    /*vMov=new Movimiento[tam];
+    for (int i=0; i<tam; i++) {
+
+    }*/
+    cout<<"\n\nTotal Movimientos: "<<j<<endl;
 }
 
 /************************************

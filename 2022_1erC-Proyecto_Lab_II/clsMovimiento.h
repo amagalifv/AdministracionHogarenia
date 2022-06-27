@@ -142,7 +142,6 @@ void Movimiento::Mostrar(){
     if (getCategoria()==7) {
         mostrarServicio(getId());
     }
-    cout<<endl;
 }
 
 /*******************************************************

@@ -91,6 +91,7 @@ void agregarCategoria(){
     mensajesListados("REGISTRO AGREGADO");
     reg.Mostrar();
 }
+
 //DEBERIA ESTAR EN  MOVIMIENTOS???
 bool esMovimientoValido(int mov){
     if(mov==1 || mov==2){
@@ -98,6 +99,7 @@ bool esMovimientoValido(int mov){
     }
     return false;
 }
+
 bool esRepetido(const char *pNombre){
     Categoria reg;
     int posDisco=0;
@@ -109,6 +111,7 @@ bool esRepetido(const char *pNombre){
     }
     return false;
 }
+
 int listarCategorias(){
     Categoria reg;
     int posDisco=0;
@@ -120,6 +123,7 @@ int listarCategorias(){
     }
     return contador;
 }
+
 int listarCategoriaPorId(int cod){
     Categoria reg;
     int posDisco=0;
@@ -133,6 +137,7 @@ int listarCategoriaPorId(int cod){
     }
     return -1;
 }
+
 bool esEgreso(Categoria *arrayCategorias, int codCateg){
 
     if(arrayCategorias[codCateg-1].getTipoMov()==2){
@@ -141,6 +146,7 @@ bool esEgreso(Categoria *arrayCategorias, int codCateg){
 
     return false;
 }
+
 bool esGastoFijo(int anio, int mes, int codCateg){
     Movimiento reg;
     int posDisco=0;
@@ -158,6 +164,7 @@ bool esGastoFijo(int anio, int mes, int codCateg){
     }
     return false;
 }
+
 int calcularCantidadCategorias(){
     Categoria reg;
     int posDisco=0;
@@ -169,6 +176,7 @@ int calcularCantidadCategorias(){
 
     return contador;
 }
+
 void copiarArchivoCategoriasAlArray(Categoria *arrayCategorias){
     Categoria reg;
     int posDisco=0;
@@ -178,6 +186,7 @@ void copiarArchivoCategoriasAlArray(Categoria *arrayCategorias){
         posDisco++;
     }
 }
+
 int generarVectorDinamicoCategorias(Categoria *arrayCategorias){
 
     int cantidad=calcularCantidadCategorias();
@@ -197,6 +206,7 @@ int generarVectorDinamicoCategorias(Categoria *arrayCategorias){
     return cantidad;
 
 }
+
 void mostrarIngesosArrayCategorias(Categoria *arrayCategorias, int cantidad){
     for (int i=0; i<cantidad; i++){
         if(arrayCategorias[i].getTipoMov()==1){
@@ -204,6 +214,7 @@ void mostrarIngesosArrayCategorias(Categoria *arrayCategorias, int cantidad){
         }
     }
 }
+
 void mostrarEgresosArrayCategorias(Categoria *arrayCategorias, int cantidad){
     for (int i=0; i<cantidad; i++){
         if(arrayCategorias[i].getTipoMov()==2){
