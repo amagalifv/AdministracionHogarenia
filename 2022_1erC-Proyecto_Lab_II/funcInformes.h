@@ -92,6 +92,7 @@ void totalIngresosPorAnio(int anio){
 
             cout<<": $"<<acu<<endl;
             acu=0;
+            j=0;
         }
 
         i++;
@@ -101,7 +102,7 @@ void totalIngresosPorAnio(int anio){
 void totalEgresosPorAnio(int anio){
     Categoria cate;
     Movimiento mov;
-    float cont=0;
+    float acu=0;
     int i=0, j=0;
 
     while (cate.leerDeDisco(i)==1) {
@@ -111,13 +112,14 @@ void totalEgresosPorAnio(int anio){
 
             while(mov.leerDeDisco(j)==1) {
                 if (mov.getFecha().getAnio()==anio && mov.getCategoria()==cate.getId()) {
-                    cont+=mov.getImporte();
+                    acu+=mov.getImporte();
                 }
                 j++;
             }
 
-            cout<<": $"<<cont<<endl;
-            cont=0;
+            cout<<": $"<<acu<<endl;
+            acu=0;
+            j=0;
         }
 
         i++;
@@ -180,29 +182,30 @@ int menuInformes(){
         switch(opc){
 
             case 1:
-                cout<<"INGRESE EL AÑO A LISTAR";
+                cout<<"INGRESE EL AÑO A LISTAR: ";
                 cin>>anio;
                 totalIngresosPorMes(anio);
                 break;
             case 2:
-                cout<<"INGRESE EL AÑO A LISTAR";
+                cout<<"INGRESE EL AÑO A LISTAR: ";
                 cin>>anio;
                 totalEgresosPorMes(anio);
                 break;
             case 3:
-                cout<<"INGRESE EL AÑO A LISTAR";
+                cout<<"INGRESE EL AÑO A LISTAR: ";
                 cin>>anio;
                 totalIngresosPorAnio(anio);
                 break;
             case 4:
-                cout<<"INGRESE EL AÑO A LISTAR";
+                cout<<"INGRESE EL AÑO A LISTAR: ";
                 cin>>anio;
                 totalEgresosPorAnio(anio);
                 break;
             case 5:
-                cout<<"INGRESE EL AÑO A LISTAR";
-                cin>>anio;
+                //cout<<"INGRESE EL AÑO A LISTAR: ";
+                //cin>>anio;
                 //totalGastoPorCategoriaMensual(anio);
+                cout<<"En construccion...";
                 break;
             case 6:
                 cout<<"En construccion...";

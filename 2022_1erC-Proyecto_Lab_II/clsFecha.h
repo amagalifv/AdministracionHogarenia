@@ -34,9 +34,8 @@ class Fecha {
 };
 
 void Fecha::Mostrar(){
-    cout<<endl;
     if (getDia()<10){
-        cout<<" 0"<<getDia();
+        cout<<"0"<<getDia();
     }else{
         cout<<getDia();
     }

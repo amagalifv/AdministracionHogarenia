@@ -53,8 +53,7 @@ int main(){
                 menuKakebo();
                 break;
             case 4:
-                //menuInformes();
-                cout<<"En construccion...";
+                menuInformes();
                 break;
             case 5:
                 menuConfiguracion();
