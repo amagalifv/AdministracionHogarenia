@@ -1,4 +1,4 @@
-# AdmionistracionHogare-a
+# AdmionistracionHogareña
 Console aplication of a home expencies administration. Aplicación de consola para la administración hogareña
 
 Tipo de proyecto: Sistema de gestión de archivos
